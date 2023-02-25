@@ -52,17 +52,11 @@ function App() {
     }, [])
 
     //Закрытие попапов на esc
-    useEffect(() => {
-        function handleEscClose(event) {
-            if (event.key === 'Escape') {
-                closeAllPopups();
-            }
+    function handleEscClose(event) {
+        if (event.key === 'Escape') {
+            closeAllPopups();
         }
-        document.addEventListener('keydown', handleEscClose);
-        return () => {
-            document.removeEventListener('keydown', handleEscClose);
-        }
-    });
+    }
 
     // Проверка токена при заходе на страницу
     function checkToken (){
@@ -74,7 +68,9 @@ function App() {
                     setEmail(data.data.email);
                     navigate("/places", {replace:true});
                 }
-            })
+            }).catch((err) => {
+                console.log(err);
+          });
         }
     }
 
@@ -199,10 +195,10 @@ function App() {
                         />
                     </Routes>
                     {loggedIn&&<Footer />}
-                    <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
-                    <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
-                    <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddCard={handleAddPlaceSubmit} />
-                    <ImagePopup card={selectedCard} onClose={closeAllPopups} />
+                    <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} handleEscClose={handleEscClose} />
+                    <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} handleEscClose={handleEscClose} />
+                    <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddCard={handleAddPlaceSubmit} handleEscClose={handleEscClose} />
+                    <ImagePopup card={selectedCard} onClose={closeAllPopups} handleEscClose={handleEscClose} />
                 </div>
             </div>
         </CurrentUserContext.Provider>

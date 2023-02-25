@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PopupWithForm from './PopupWithForm';
 import { CurrentUserContext} from '../contexts/CurrentUserContext.js';
 
-function EditProfilePopup({isOpen, onClose, onUpdateUser}) {
+function EditProfilePopup({isOpen, onClose, onUpdateUser,handleEscClose}) {
     const currentUser = React.useContext(CurrentUserContext);
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
@@ -35,7 +35,8 @@ function EditProfilePopup({isOpen, onClose, onUpdateUser}) {
             btnName='Сохранить'
             isOpen={isOpen}
             onClose={onClose}
-            onSubmit={handleSubmit}>
+            onSubmit={handleSubmit}
+            handleEscClose={handleEscClose}>
             <label className="popup__form-label">
                 <input name="popupName" type="text" value={name || ''} onChange={handleNameChange} placeholder="Имя" id="name-input" className="popup__input popup__input_value_name" minLength="2" maxLength="40" required />
                 <span className="popup__input-error name-input-error"></span>

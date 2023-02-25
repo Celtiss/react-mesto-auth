@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import PopupWithForm from './PopupWithForm';
 
-function EditAvatarPopup({isOpen, onClose, onUpdateAvatar}) {
+function EditAvatarPopup({isOpen, onClose, onUpdateAvatar, handleEscClose}) {
     const avatar = useRef();
 
     useEffect(() => {
@@ -21,7 +21,8 @@ function EditAvatarPopup({isOpen, onClose, onUpdateAvatar}) {
             btnName='Сохранить'
             isOpen={isOpen}
             onClose={onClose}
-            onSubmit={handleSubmit}>
+            onSubmit={handleSubmit}
+            handleEscClose={handleEscClose}>
             <label className="popup__form-label">
                 <input name="popupAvatar" type="url" ref={avatar} placeholder="Ссылка на аватарку" id="avatar-input" className="popup__input popup__input_value_avatar" required />
                 <span className="popup__input-error avatar-input-error"></span>

@@ -1,7 +1,7 @@
 import React from 'react';
 import PopupWithForm from './PopupWithForm';
 
-function AddPlacePopup({isOpen, onClose, onAddCard}) {
+function AddPlacePopup({isOpen, onClose, onAddCard,handleEscClose}) {
 
     const [name, setName] = React.useState('');
     const [link, setLink] = React.useState('');
@@ -36,7 +36,8 @@ function AddPlacePopup({isOpen, onClose, onAddCard}) {
             btnName='Создать'
             isOpen={isOpen}
             onClose={onClose}
-            onSubmit={handleSubmit}>
+            onSubmit={handleSubmit}
+            handleEscClose={handleEscClose}>
             <label className="popup__form-label">
                 <input name="popupName" type="text" value={name || ''} onChange={handleNameChange} placeholder="Название" id="place-input"  className="popup__input popup__input_value_name" required minLength="2" maxLength="30" />
                 <span className="popup__input-error place-input-error"></span>

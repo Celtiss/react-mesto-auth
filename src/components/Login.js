@@ -24,7 +24,6 @@ function Login({name, handleLogin, isOpen, onClose, onSubmitDataModal}){
     const handleSubmit = (e) => {
         e.preventDefault();
         const { email, password } = formValue;
-        console.log('submit');
         auth.signIn(email, password).then((res) => {
             setStatusRequest(true);
             if(res.token){

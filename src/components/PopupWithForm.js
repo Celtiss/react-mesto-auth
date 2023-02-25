@@ -1,3 +1,4 @@
+import React, {useEffect} from "react";
 function PopupWithForm(props) {
     function closePopup(e) {
         if (e.target.classList.contains('popup_is-opened') || e.target.classList.contains('popup__close'))
@@ -5,6 +6,16 @@ function PopupWithForm(props) {
             props.onClose();
         }
     }
+
+    useEffect(() => {
+        document.addEventListener('keydown', props.handleEscClose);
+        console.log('start');
+        return () => {
+            document.removeEventListener('keydown', props.handleEscClose);
+            console.log('end');
+        }
+    });
+
     return (
         <div className={`popup popup_type_${props.name} ${props.isOpen ? 'popup_is-opened' : ''}`} onClick={closePopup}>
             <div className="popup__container">
